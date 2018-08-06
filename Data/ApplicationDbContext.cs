@@ -7,7 +7,7 @@ using OryxWestAfrica.Models;
 
 namespace OryxWestAfrica.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -19,5 +19,8 @@ namespace OryxWestAfrica.Data
         public DbSet<Partner> Partners { get; set; }
         public DbSet<Picture> Pictures { get; set; }
         public DbSet<Gallery> Galleries { get; set; }
+        public DbSet<DemoTester> DemoTesters { get; set; }
+
+        
     }
 }

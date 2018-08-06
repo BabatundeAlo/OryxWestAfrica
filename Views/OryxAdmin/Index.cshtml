@@ -1,0 +1,50 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Welcome Admin</h2>
+
+<form>
+    <p> Please Choose an action</p>
+
+
+    <button asp-action="Index" asp-controller="Solutions">Solutions</button>
+    <button asp-action="Index" asp-controller="Clients">Clients</button>
+    <button asp-action="Index" asp-controller="Partners">Partners</button>
+    <button asp-action="Index" asp-controller="Pictures">Picture</button>
+    <button asp-action="Index" asp-controller="Clients">Events</button>
+
+    <br />
+    <hr/>
+    <p>testing slider</p>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <table>
+                <tr>
+                    @{
+                        int cnt = 0;
+                        List<OryxWestAfrica.Models.ViewModels.SliderView> pix = ViewBag.Courses;
+
+                        foreach (var pictures in pix)
+                        {
+                            if (cnt++ % 3 == 0)
+                            {
+                            @:</tr><tr>
+                            }
+                            @:<td>
+                                <input type="checkbox"
+                                       name="selectedCourses"
+                                       value="@pictures.PictureName"                                       
+                                      @(Html.Raw(pictures.Assigned ? "checked=\"checked\"" : "")) />
+                                @pictures.PictureID @:  @pictures.PictureName
+                            @:</td>
+                        }
+                    @:</tr>
+                    }
+                </table>
+            </div>
+        </div>
+
+    </form>
+
