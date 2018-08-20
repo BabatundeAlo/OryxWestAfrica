@@ -3,48 +3,110 @@
     ViewData["Title"] = "Index";
 }
 
-<h2>Welcome Admin</h2>
+@*<h2>Welcome Admin</h2>*@
 
-<form>
-    <p> Please Choose an action</p>
+<div class="container">
+    <div class="row"></div>
+    <div class="row"></div>
+    <div class="row"></div>
+    <div class="blue-grey lighten-4 black-text darken-text-2 center">
+        <div></div>
+        <p><h3>ADMIN</h3></p>
+    </div>
 
+    @*<div class="container">*@
+    <div class="row"></div>
+    <div class="row"></div>
+    <div class="row"></div>
 
-    <button asp-action="Index" asp-controller="Solutions">Solutions</button>
-    <button asp-action="Index" asp-controller="Clients">Clients</button>
-    <button asp-action="Index" asp-controller="Partners">Partners</button>
-    <button asp-action="Index" asp-controller="Pictures">Picture</button>
-    <button asp-action="Index" asp-controller="Clients">Events</button>
-
-    <br />
-    <hr/>
-    <p>testing slider</p>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <table>
-                <tr>
-                    @{
-                        int cnt = 0;
-                        List<OryxWestAfrica.Models.ViewModels.SliderView> pix = ViewBag.Courses;
-
-                        foreach (var pictures in pix)
-                        {
-                            if (cnt++ % 3 == 0)
-                            {
-                            @:</tr><tr>
-                            }
-                            @:<td>
-                                <input type="checkbox"
-                                       name="selectedCourses"
-                                       value="@pictures.PictureName"                                       
-                                      @(Html.Raw(pictures.Assigned ? "checked=\"checked\"" : "")) />
-                                @pictures.PictureID @:  @pictures.PictureName
-                            @:</td>
-                        }
-                    @:</tr>
-                    }
-                </table>
-            </div>
+    <div class="row grey lighten-5">
+        <p><h5>Please Choose an action</h5></p>
+        <hr />
+        <div class="col l3 m6 s12">
+            <p>
+                <button asp-action="Index" asp-controller="Solutions" class="btn waves-effect waves-purple">Solutions</button>
+            </p>
         </div>
+        <div class="col l3 m6 s12">
+            <p>
+                <button asp-action="Index" asp-controller="Clients" class="btn waves-effect waves-purple">Clients</button>
+            </p>
+        </div>
+        <div class="col l3 m6 s12">
+            <p>
+                <button asp-action="Index" asp-controller="Partners" class="btn waves-effect waves-purple">Partners</button>
+            </p>
 
-    </form>
+        </div>
+        <div class="col l3 m6 s12">
+            <p>
+                <button asp-action="Index" asp-controller="Pictures" class="btn waves-effect waves-purple">Picture</button>
+            </p>
+        </div>
+        @*<div class="col l6 m6 s12">
+                <p>
+                    <button asp-action="Index" asp-controller="Gallery">Events</button>
+                </p>
+            </div>*@
 
+
+
+
+
+
+
+    </div>
+    <br />
+    <br />
+    <br />
+    <hr />
+
+
+    <div class="row grey lighten-5">
+        <div class="col l12 m12 s12">
+            @*<p>testing slider</p>*@
+
+        </div>
+    </div>
+
+    @*<button asp-action="Index" asp-controller="Solutions">Solutions</button>
+        <button asp-action="Index" asp-controller="Clients">Clients</button>
+        <button asp-action="Index" asp-controller="Partners">Partners</button>
+        <button asp-action="Index" asp-controller="Pictures">Picture</button>
+        <button asp-action="Index" asp-controller="Gallery">Events</button>*@
+
+
+    <form>
+        <div class="form-group z-depth-1 show-on-medium-and-down">
+            <div class="col-md-offset-2 col-md-10">
+                <table>
+                    <tr>
+                        @{
+                            int cnt = 0;
+                            List<OryxWestAfrica.Models.ViewModels.SliderView> pix = ViewBag.Courses;
+
+                            foreach (var pictures in pix)
+                            {
+                                if (cnt++ % 3 == 0)
+                                {
+                                @:</tr><tr>
+                                }
+                                @:<td>
+                                    <input type="checkbox" checked="checked"
+                                           name="selectedCourses"
+                                           value="@pictures.PictureName"
+                                           @(Html.Raw(pictures.Assigned ? "checked=\"checked\"" : "")) />
+                                    @pictures.PictureID @:  @pictures.PictureName
+                                @:</td>
+                            }
+                        @:</tr>
+                        }
+                    </table>
+                </div>
+            </div>
+
+            @*</div>*@
+
+        </form>
+
+    </div>

@@ -2,9 +2,9 @@
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace OryxWestAfrica.Data.Migrations
+namespace OryxWestAfrica.Migrations
 {
-    public partial class CreateIdentitySchema : Migration
+    public partial class Addinitialentitymodels : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -45,6 +45,114 @@ namespace OryxWestAfrica.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Careers",
+                columns: table => new
+                {
+                    CareerID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Careers", x => x.CareerID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Clients",
+                columns: table => new
+                {
+                    ClientId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    ClientName = table.Column<string>(nullable: true),
+                    ClientDesc = table.Column<string>(nullable: true),
+                    Image = table.Column<byte[]>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Clients", x => x.ClientId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "DemoTesters",
+                columns: table => new
+                {
+                    DemoTesterID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    DemoName = table.Column<string>(nullable: true),
+                    Image = table.Column<byte[]>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    Differentiator = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DemoTesters", x => x.DemoTesterID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Galleries",
+                columns: table => new
+                {
+                    GalleryID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    GalleryName = table.Column<string>(nullable: true),
+                    Image = table.Column<byte[]>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    Differentiator = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Galleries", x => x.GalleryID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Partners",
+                columns: table => new
+                {
+                    PartnerID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(nullable: true),
+                    Image = table.Column<byte[]>(nullable: true),
+                    Details = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Partners", x => x.PartnerID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Pictures",
+                columns: table => new
+                {
+                    PictureID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    PictureName = table.Column<string>(nullable: true),
+                    Image = table.Column<byte[]>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    Differentiator = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Pictures", x => x.PictureID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Solutions",
+                columns: table => new
+                {
+                    SolutionId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(nullable: true),
+                    Details = table.Column<string>(nullable: true),
+                    Image = table.Column<byte[]>(nullable: true),
+                    Link = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Solutions", x => x.SolutionId);
                 });
 
             migrationBuilder.CreateTable(
@@ -93,8 +201,8 @@ namespace OryxWestAfrica.Data.Migrations
                 name: "AspNetUserLogins",
                 columns: table => new
                 {
-                    LoginProvider = table.Column<string>(maxLength: 128, nullable: false),
-                    ProviderKey = table.Column<string>(maxLength: 128, nullable: false),
+                    LoginProvider = table.Column<string>(nullable: false),
+                    ProviderKey = table.Column<string>(nullable: false),
                     ProviderDisplayName = table.Column<string>(nullable: true),
                     UserId = table.Column<string>(nullable: false)
                 },
@@ -138,8 +246,8 @@ namespace OryxWestAfrica.Data.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<string>(nullable: false),
-                    LoginProvider = table.Column<string>(maxLength: 128, nullable: false),
-                    Name = table.Column<string>(maxLength: 128, nullable: false),
+                    LoginProvider = table.Column<string>(nullable: false),
+                    Name = table.Column<string>(nullable: false),
                     Value = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -209,6 +317,27 @@ namespace OryxWestAfrica.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "Careers");
+
+            migrationBuilder.DropTable(
+                name: "Clients");
+
+            migrationBuilder.DropTable(
+                name: "DemoTesters");
+
+            migrationBuilder.DropTable(
+                name: "Galleries");
+
+            migrationBuilder.DropTable(
+                name: "Partners");
+
+            migrationBuilder.DropTable(
+                name: "Pictures");
+
+            migrationBuilder.DropTable(
+                name: "Solutions");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

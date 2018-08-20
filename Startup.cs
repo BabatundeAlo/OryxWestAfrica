@@ -105,7 +105,7 @@ namespace OryxWestAfrica
             }
 
             // find the user with the admin email 
-            var _user = await UserManager.FindByEmailAsync("Oryxwa@oryx-wa.com");
+            var _user = await UserManager.FindByEmailAsync("amoo@oryx-wa.com");
 
             // check if the user exists
             if (_user == null)
@@ -113,8 +113,8 @@ namespace OryxWestAfrica
                 //Here you could create the super admin who will maintain the web app
                 var poweruser = new ApplicationUser
                 {
-                    UserName = "Oryxwa@oryx-wa.com",
-                    Email = "Oryxwa@oryx-wa.com",
+                    UserName = "amoo@oryx-wa.com",
+                    Email = "amoo@oryx-wa.com",
                 };
                 string adminPassword = "p@$$w0rD";
 
