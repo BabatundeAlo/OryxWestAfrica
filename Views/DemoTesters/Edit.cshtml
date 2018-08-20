@@ -1,4 +1,4 @@
-﻿@model OryxWestAfrica.Models.Picture
+﻿@model OryxWestAfrica.Models.DemoTester
 
 @{
     ViewData["Title"] = "Edit";
@@ -6,17 +6,17 @@
 
 <h2>Edit</h2>
 
-<h4>Picture</h4>
+<h4>DemoTester</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="PictureID" />
+            <input type="hidden" asp-for="DemoTesterID" />
             <div class="form-group">
-                <label asp-for="PictureName" class="control-label"></label>
-                <input asp-for="PictureName" class="form-control" />
-                <span asp-validation-for="PictureName" class="text-danger"></span>
+                <label asp-for="DemoName" class="control-label"></label>
+                <input asp-for="DemoName" class="form-control" />
+                <span asp-validation-for="DemoName" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Image" class="control-label"></label>
@@ -44,3 +44,6 @@
     <a asp-action="Index">Back to List</a>
 </div>
 
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

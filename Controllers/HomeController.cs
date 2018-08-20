@@ -43,10 +43,45 @@ namespace OryxWestAfrica.Controllers
             return View();
         }
 
+        public IActionResult Career()
+        {
+            ViewData["Message"] = "Your application description page.";
+
+            return View();
+        }
+
+        public IActionResult Client()
+        {
+            ViewData["Message"] = "Your application description page.";
+
+            return View();
+        }
+
         public IActionResult Contact()
         {
             
             ViewData["Message"] = "Your contact page.";
+
+            return View();
+        }
+
+        public IActionResult Gallery()
+        {
+            ViewData["Message"] = "Your application description page.";
+
+            return View();
+        }
+
+        public IActionResult Partner()
+        {
+            ViewData["Message"] = "Your application description page.";
+
+            return View();
+        }
+
+        public IActionResult Solution()
+        {
+            ViewData["Message"] = "Your application description page.";
 
             return View();
         }

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<OryxWestAfrica.Models.Picture>
+﻿@model IEnumerable<OryxWestAfrica.Models.DemoTester>
 
 @{
     ViewData["Title"] = "Index";
@@ -13,11 +13,11 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.PictureName)
+                @Html.DisplayNameFor(model => model.DemoName)
             </th>
-            @*<th>
+            <th>
                 @Html.DisplayNameFor(model => model.Image)
-            </th>*@
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Description)
             </th>
@@ -31,11 +31,11 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.PictureName)
+                @Html.DisplayFor(modelItem => item.DemoName)
             </td>
-            @*<td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Image)
-            </td>*@
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
@@ -43,9 +43,9 @@
                 @Html.DisplayFor(modelItem => item.Differentiator)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.PictureID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.PictureID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.PictureID">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.DemoTesterID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.DemoTesterID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.DemoTesterID">Delete</a>
             </td>
         </tr>
 }

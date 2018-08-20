@@ -19,8 +19,5 @@ namespace OryxWestAfrica.Data
         public DbSet<Partner> Partners { get; set; }
         public DbSet<Picture> Pictures { get; set; }
         public DbSet<Gallery> Galleries { get; set; }
-      //  public DbSet<DemoTester> DemoTesters { get; set; }
-        public DbSet<GaleryImage> GaleryImages { get;  set; }
-        public DbSet<Banner> Banners { get; set; }
     }
 }
