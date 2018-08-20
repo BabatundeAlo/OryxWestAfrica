@@ -1,0 +1,13 @@
+﻿
+@model IEnumerable<OryxWestAfrica.Models.Banner>
+
+@{
+    ViewData["Title"] = "Get";
+}
+
+<h2>Get</h2>
+@foreach (var image in Model)
+{
+    @Html.DisplayFor(modelItem => image.Tag)
+    <img src="@string.Format("data:image/gif;base64,{0}",(image.Url))" width="200" height="200" />
+}

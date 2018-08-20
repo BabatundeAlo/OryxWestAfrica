@@ -1,0 +1,62 @@
+﻿@model MultipleModel
+
+@{
+    ViewData["Title"] = "MultipleAsync";
+}
+
+<h2>MultipleAsync</h2>
+
+<h4>Gallery</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="MultipleAsync" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+
+                <label asp-for="gallery.GalleryName" class="control-label"></label>
+                <input asp-for="gallery.GalleryName" class="form-control" />
+                <span asp-validation-for="gallery.GalleryName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="gallery.Description" class="control-label"></label>
+                <input asp-for="gallery.Description" class="form-control" />
+                <span asp-validation-for="gallery.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="gallery.Differentiator" class="control-label"></label>
+                <input asp-for="gallery.Differentiator" class="form-control" />
+                <span asp-validation-for="gallery.Differentiator" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="GaleryImage.GalleryID" class="control-label"></label>
+                <select asp-for="gallery.GalleryID" class="form-control" asp-items="ViewBag.Gallery"> </select>
+                <span asp-validation-for="GaleryImage.GalleryID" class="text-danger"></span>
+
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="GaleryImage.Tag" class="control-label"></label>
+                <input asp-for="GaleryImage.Tag" class="form-control" />
+                <span asp-validation-for="GaleryImage.Tag" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GaleryImage.Image" class="control-label"></label>
+                <input type="file" id="files" multiple asp-for="GaleryImage.Image" />
+                <span asp-validation-for="GaleryImage.Image" class="text-danger"></span>
+            </div>
+
+            @*   <partial name="_view" />*@
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

@@ -10,5 +10,6 @@ namespace OryxWestAfrica.Models.ViewModels
         public int PictureID { get; set; }
         public string PictureName { get; set; }
         public bool Assigned { get; set; }
+        
     }
 }

@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Picture>
+
+@{
+    ViewData["Title"] = "Banner Choice";
+}
+@*<script src="~/js/site.min.js" asp-append-version="true"></script>*@
+<h2>Checker</h2>
+
+<h4>Picture</h4>
+<hr />
+<div class="row">
+    <form asp-action="Checker">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        @foreach (var pictures in Model)
+        {
+            <div class="col-lg-5">
+
+
+
+                <div class="form-group">
+                    <img src="@string.Format("data:image/gif;base64,{0}",Convert.ToBase64String(pictures.Image))" style="max-width:100px; max-height:100px" />
+                    <input type="checkbox" name="select" value="@pictures.PictureID"
+                           @(Html.Raw(pictures.Chcker ? "checked=\"checked\"" : "")) />
+                    @pictures.PictureID  @pictures.PictureName
+                    <span asp-validation-for="@pictures.Chcker" class="checkbox"></span>
+                </div>
+
+
+
+            </div>
+        }
+        <div class="form-group">
+            <input type="submit" value="Save" class="btn btn-default" />
+        </div>
+    </form>
+
+</div>
+@*<div></div>
+<script>
+    var countChecked = function () {
+        var n = $("input:checked").length;
+        $("div").text(n + (n === 1 ? " is" : " are") + " checked!");
+    };
+    countChecked();
+
+    $("input[type=checkbox]").on("click", countChecked);
+</script>*@
+
+
+

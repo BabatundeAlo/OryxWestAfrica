@@ -8,5 +8,6 @@ namespace OryxWestAfrica.Models
 {
     public class ApplicationUser:IdentityUser
     {
+
     }
 }

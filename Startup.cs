@@ -13,6 +13,8 @@ using OryxWestAfrica.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using OryxWestAfrica.Models;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using OryxWestAfrica.Services;
 
 namespace OryxWestAfrica
 {
@@ -38,18 +40,22 @@ namespace OryxWestAfrica
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>()
-                .AddEntityFrameworkStores<ApplicationDbContext>();
 
-            //services.AddIdentity<ApplicationUser, IdentityRole>()
-            //    .AddEntityFrameworkStores<ApplicationDbContext>()
-            //    .AddDefaultTokenProviders();
+            //services.AddDefaultIdentity<IdentityUser>()
+            //    .AddEntityFrameworkStores<ApplicationDbContext>();
 
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
+
+            
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddSingleton<IEmailSender, EmailSender>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider service)
         {
             if (env.IsDevelopment())
             {
@@ -64,9 +70,10 @@ namespace OryxWestAfrica
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseAuthentication();
             app.UseCookiePolicy();
 
-            app.UseAuthentication();
+           
 
             app.UseMvc(routes =>
             {
@@ -74,7 +81,7 @@ namespace OryxWestAfrica
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
-            //CreateRoles(service).Wait();
+            CreateRoles(service).Wait();
         }
 
 
@@ -83,7 +90,7 @@ namespace OryxWestAfrica
             //initializing custom roles 
             var RoleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
             var UserManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
-            string[] roleNames = { "Admin", "Store-Manager", "Member" };
+            string[] roleNames = { "Admin", "HRManager", "Staffs" };
             IdentityResult roleResult;
 
             foreach (var roleName in roleNames)
@@ -98,7 +105,7 @@ namespace OryxWestAfrica
             }
 
             // find the user with the admin email 
-            var _user = await UserManager.FindByEmailAsync("admin@oryx-wa.com");
+            var _user = await UserManager.FindByEmailAsync("Oryxwa@oryx-wa.com");
 
             // check if the user exists
             if (_user == null)
@@ -106,8 +113,8 @@ namespace OryxWestAfrica
                 //Here you could create the super admin who will maintain the web app
                 var poweruser = new ApplicationUser
                 {
-                    UserName = "admin@oryx-wa.com",
-                    Email = "admin@oryx-wa.com",
+                    UserName = "Oryxwa@oryx-wa.com",
+                    Email = "Oryxwa@oryx-wa.com",
                 };
                 string adminPassword = "p@$$w0rD";
 
