@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using OryxWestAfrica.Data;
 using OryxWestAfrica.Models;
+using OryxWestAfrica.Models.ViewModels;
 
 namespace OryxWestAfrica.Controllers
 {
@@ -24,6 +25,8 @@ namespace OryxWestAfrica.Controllers
         // GET: Pictures
         public async Task<IActionResult> Index()
         {
+            var pixlist = _context.Pictures;
+            ViewData["Mee"] = pixlist.ToList();
             return View(await _context.Pictures.ToListAsync());
         }
 
@@ -121,7 +124,7 @@ namespace OryxWestAfrica.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PictureID,PictureName,Image,Description,Differentiator")] Picture picture)
+        public async Task<IActionResult> Edit(int id, [Bind("PictureID,PictureName,Image,Description,Differentiator,Chcker")] Picture picture, List<IFormFile> Image)
         {
             if (id != picture.PictureID)
             {
@@ -132,6 +135,28 @@ namespace OryxWestAfrica.Controllers
             {
                 try
                 {
+                    foreach (var item in Image)
+                    {
+                        if (item.Length > 0)
+                        {
+
+                            using (var stream = new MemoryStream())
+
+
+                            {
+                                await item.CopyToAsync(stream);
+                                picture.Image = stream.ToArray();
+                                
+                                
+                            }
+                        }
+                        else
+
+                        {
+
+                            picture.Image = picture.Image;
+                        }
+                    }
                     _context.Update(picture);
                     await _context.SaveChangesAsync();
                 }
@@ -167,6 +192,39 @@ namespace OryxWestAfrica.Controllers
             }
 
             return View(picture);
+        }
+        private void PopulatePix(Picture picture)
+        {
+            //Picture picture
+            var pictures = _context.Pictures;
+
+            var viewModel = new List<SliderView>();
+            foreach (var pix in pictures)
+            {
+                viewModel.Add(new SliderView
+                {
+                    PictureID = pix.PictureID,
+                    PictureName = pix.PictureName,
+                    Assigned = Convert.ToBoolean(pix.Chcker)
+                });
+            }
+            ViewData["Images"] = viewModel;
+        }
+
+        [HttpGet]
+        public IActionResult Checker()
+        {
+            var listr = _context.Pictures.ToList();
+          
+            return View(listr);
+        }
+
+        [HttpPost]
+        public IActionResult Checker(Picture picture)
+        {
+            var listr = _context.Pictures.ToList();
+
+            return View(listr);
         }
 
         // POST: Pictures/Delete/5

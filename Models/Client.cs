@@ -10,9 +10,15 @@ namespace OryxWestAfrica.Models
     { 
         [Key]
      public int ClientId { get; set; }
+        [Display(Name = "Client Name")]
+        [Required]
     public string ClientName { get; set; }
-    public string ClientDesc { get; set; }
-    public byte[] Image { get; set; }
+        [Display(Name = "Client Description")]
+        [Required]
+        public string ClientDesc { get; set; }
+        [Display(Name = "Upload Image")]
+        [Required]
+        public byte[] Image { get; set; }
 
 }
 }

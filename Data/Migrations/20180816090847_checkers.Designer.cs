@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OryxWestAfrica.Data;
 
-namespace OryxWestAfrica.Migrations
+namespace OryxWestAfrica.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180816090847_checkers")]
+    partial class checkers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -64,44 +66,6 @@ namespace OryxWestAfrica.Migrations
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("ClaimType");
-
-                    b.Property<string>("ClaimValue");
-
-                    b.Property<string>("UserId")
-                        .IsRequired();
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("AspNetUserClaims");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
-                {
-                    b.Property<string>("LoginProvider");
-
-                    b.Property<string>("ProviderKey");
-
-                    b.Property<string>("ProviderDisplayName");
-
-                    b.Property<string>("UserId")
-                        .IsRequired();
-
-                    b.HasKey("LoginProvider", "ProviderKey");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("AspNetUserLogins");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -218,40 +182,104 @@ namespace OryxWestAfrica.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+            modelBuilder.Entity("OryxWestAfrica.Models.Banner", b =>
                 {
-                    b.Property<int>("DemoTesterID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ClaimType");
+                    b.Property<string>("Description");
 
-                    b.Property<string>("ClaimValue");
+                    b.Property<string>("Name");
 
-                    b.Property<string>("UserId")
-                        .IsRequired();
+                    b.Property<string>("Tag");
+
+                    b.Property<string>("Url");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.ToTable("Banners");
+                });
 
-                    b.ToTable("AspNetUserClaims");
+            modelBuilder.Entity("OryxWestAfrica.Models.Career", b =>
+                {
+                    b.Property<int>("CareerID")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("CareerID");
+
+                    b.ToTable("Careers");
+                });
+
+            modelBuilder.Entity("OryxWestAfrica.Models.Client", b =>
+                {
+                    b.Property<int>("ClientId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ClientDesc");
+
+                    b.Property<string>("ClientName");
+
+                    b.Property<byte[]>("Image");
+
+                    b.HasKey("ClientId");
+
+                    b.ToTable("Clients");
+                });
+
+            modelBuilder.Entity("OryxWestAfrica.Models.GaleryImage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("GalleryID");
+
+                    b.Property<byte[]>("Image");
+
+                    b.Property<string>("Tag");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GalleryID");
+
+                    b.ToTable("GaleryImages");
                 });
 
             modelBuilder.Entity("OryxWestAfrica.Models.Gallery", b =>
                 {
-                    b.Property<string>("LoginProvider")
-                        .HasMaxLength(128);
+                    b.Property<int>("GalleryID")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ProviderKey")
-                        .HasMaxLength(128);
+                    b.Property<string>("Description");
 
-                    b.Property<string>("ProviderDisplayName");
+                    b.Property<string>("Differentiator");
 
-                    b.Property<string>("UserId")
-                        .IsRequired();
+                    b.Property<string>("GalleryName");
 
-                    b.HasKey("LoginProvider", "ProviderKey");
+                    b.HasKey("GalleryID");
+
+                    b.ToTable("Galleries");
+                });
+
+            modelBuilder.Entity("OryxWestAfrica.Models.Partner", b =>
+                {
+                    b.Property<int>("PartnerID")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Details");
+
+                    b.Property<byte[]>("Image");
+
+                    b.Property<string>("Name");
 
                     b.HasKey("PartnerID");
 
@@ -260,11 +288,19 @@ namespace OryxWestAfrica.Migrations
 
             modelBuilder.Entity("OryxWestAfrica.Models.Picture", b =>
                 {
-                    b.Property<string>("UserId");
+                    b.Property<int>("PictureID")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("RoleId");
+                    b.Property<bool>("Chcker");
 
-                    b.HasKey("UserId", "RoleId");
+                    b.Property<string>("Description");
+
+                    b.Property<string>("Differentiator");
+
+                    b.Property<byte[]>("Image");
+
+                    b.Property<string>("PictureName");
 
                     b.HasKey("PictureID");
 
@@ -273,19 +309,40 @@ namespace OryxWestAfrica.Migrations
 
             modelBuilder.Entity("OryxWestAfrica.Models.Solution", b =>
                 {
-                    b.Property<string>("UserId");
+                    b.Property<int>("SolutionId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("LoginProvider")
-                        .HasMaxLength(128);
+                    b.Property<string>("Details");
 
-                    b.Property<string>("Name")
-                        .HasMaxLength(128);
+                    b.Property<byte[]>("Image");
 
-                    b.Property<string>("Value");
+                    b.Property<string>("Link");
+
+                    b.Property<string>("Name");
 
                     b.HasKey("SolutionId");
 
                     b.ToTable("Solutions");
+                });
+
+            modelBuilder.Entity("OryxWestAfrica.Models.ViewModels.CheckUpdate", b =>
+                {
+                    b.Property<int>("CheckUpdateID")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("Assigned");
+
+                    b.Property<int?>("PictureID");
+
+                    b.Property<string>("PictureName");
+
+                    b.HasKey("CheckUpdateID");
+
+                    b.HasIndex("PictureID");
+
+                    b.ToTable("CheckUpdate");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -333,19 +390,19 @@ namespace OryxWestAfrica.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("OryxWestAfrica.Models.CheckedImage", b =>
-                {
-                    b.HasOne("OryxWestAfrica.Models.Picture", "Picture")
-                        .WithMany("CheckedImages")
-                        .HasForeignKey("PictureID");
-                });
-
             modelBuilder.Entity("OryxWestAfrica.Models.GaleryImage", b =>
                 {
                     b.HasOne("OryxWestAfrica.Models.Gallery")
                         .WithMany("Images")
                         .HasForeignKey("GalleryID")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("OryxWestAfrica.Models.ViewModels.CheckUpdate", b =>
+                {
+                    b.HasOne("OryxWestAfrica.Models.Picture")
+                        .WithMany("checkUpdates")
+                        .HasForeignKey("PictureID");
                 });
 #pragma warning restore 612, 618
         }

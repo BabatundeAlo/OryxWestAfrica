@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewData["Title"] = "Gallery";
+}
+
+<h2>Gallery</h2>
+
+<form name="form" asp-controller="Galleries" asp-action="Gallery" enctype="multipart/form-data" method="post">
+
+    <input id="files" name="files" type="file" multiple onchange="fileupload('files);" />
+    <div class="form-group">
+        <input type="submit" value="upload" class="btn btn-default" />
+    </div>
+</form>
+<script src="~/js/myjscript.js"></script>

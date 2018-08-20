@@ -19,33 +19,81 @@ namespace OryxWestAfrica.Controllers
         {
             _context = context;
         }
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
 
             var picture =new Picture();
             PopulatePix(picture);
-            //(picture);
+           
             return View();
         }
 
+        public IActionResult Imagechecked(string[] selectedImages)
+        {
+            var pi = new Picture();
+           
+            var imagetoUpdate = _context.Pictures.OrderByDescending(m=>m.PictureID).FirstOrDefault();
+            UpdateInCheckedImage(selectedImages, imagetoUpdate);
 
+            return RedirectToAction(nameof(Index));
+           
+        }
 
+    
         private void PopulatePix(Picture picture )
         {
-            //Picture picture
-            var pictures = _context.Pictures;
             
-            var viewModel = new List<SliderView>();
+            var pictures = _context.Pictures;
+           
+           
+            var viewModel = new List<CheckUpdate>();
             foreach (var pix in pictures)
             {
-                viewModel.Add(new SliderView
+                viewModel.Add(new CheckUpdate
                 {
-                    PictureID = pix.PictureID ,
+                    CheckUpdateID = pix.PictureID,
                     PictureName = pix.PictureName,
-                   // Assigned =Convert.ToBoolean( pix.Differentiator)
+                   Assigned = Convert.ToBoolean(pix.Chcker)
                 });
             }
-            ViewData["Courses"] = viewModel;
+            ViewData["Images"] = viewModel;
         }
+
+
+        private void UpdateInCheckedImage(string[] selectedImages, Picture pictureTocheck)
+        {
+            if (selectedImages == null)
+            {
+                pictureTocheck.CheckedImages = new List<CheckedImage>();
+                return;
+            }
+            //.CheckedImages.Select
+            var selectedImageHS = new HashSet<string>(selectedImages);
+            var SliderImage = new HashSet<int>(pictureTocheck.CheckedImages.Select(c => c.Picture.PictureID));
+
+            foreach (var image in _context.Pictures)
+            {
+                if (selectedImageHS.Contains(image.PictureID.ToString()))
+                {
+                    if (!SliderImage.Contains(image.PictureID))
+                    {
+                        pictureTocheck.CheckedImages.Add(new CheckedImage { CheckedImageID = image.PictureID });
+
+                    }
+                }
+                else
+                {
+
+                    if (SliderImage.Contains(pictureTocheck.PictureID))
+                    {
+                        CheckedImage imageToRemove = pictureTocheck.CheckedImages.SingleOrDefault(i => i.CheckedImageID == pictureTocheck.PictureID);
+                        _context.Remove(imageToRemove);
+                    }
+                }
+            }
+        }
+
+      
+
     }
 }
